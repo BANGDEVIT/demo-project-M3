@@ -1,0 +1,9 @@
+{"EventID":4688,"Computer":"PC01","Channel":"Security","ProcessName":"powershell.exe","User":"alice","EVTX_Tactic":"Execution","Timestamp":"2026-10-20T08:30:00"}
+{"EventID":4624,"Computer":"PC01","Channel":"Security","ProcessName":"explorer.exe","User":"alice","EVTX_Tactic":"Initial Access","Timestamp":"2026-10-20T08:31:12"}
+{"EventID":1,"Computer":"LAPTOP-02","Channel":"Microsoft-Windows-Sysmon/Operational","ProcessName":"cmd.exe","User":"bob","EVTX_Tactic":"Execution","Timestamp":"2026-10-20T08:32:45"}
+{"EventID":3,"Computer":"LAPTOP-02","Channel":"Microsoft-Windows-Sysmon/Operational","ProcessName":"powershell.exe","User":"bob","EVTX_Tactic":"Command and Control","Timestamp":"2026-10-20T08:33:02"}
+{EventID: 10, "Computer": "PC03", "ProcessName": "unknown.exe"}
+{"EventID":4688,"Computer":"PC03","Channel":"Security","ProcessName":"cmd.exe","User":"charlie","EVTX_Tactic":"Execution","Timestamp":"2026-10-20T08:35:19"}
+{"EventID":10,"Computer":"PC03","Channel":"Microsoft-Windows-Sysmon/Operational","ProcessName":"lsass.exe","User":"SYSTEM","EVTX_Tactic":"Credential Access","Timestamp":"2026-10-20T08:36:20"}
+
+{"EventID":4624,"Computer":"PC04","Channel":"Security","ProcessName":"winlogon.exe","User":"david","EVTX_Tactic":"Initial Access","Timestamp":"2026-10-20T08:37:30"}
