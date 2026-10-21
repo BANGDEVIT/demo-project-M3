@@ -50,11 +50,12 @@ def add_process_name(ev: pd.DataFrame) -> pd.DataFrame:
     Gộp các cột tiến trình thành process_path, rồi tách tên file viết thường
     thành process_name. Giá trị giữ chỗ "-" hoặc chuỗi rỗng được coi là thiếu.
     """
-    proc = ev[PROCESS_COLS[0]]
+    ev = ev.copy()
+    cols = ev[PROCESS_COLS].replace({"-": pd.NA, "": pd.NA})  # làm sạch TRƯỚC
+    proc = cols[PROCESS_COLS[0]]
     for col in PROCESS_COLS[1:]:
         proc = proc.fillna(ev[col])
 
-    ev["process_path"] = proc.replace({"-": pd.NA, "": pd.NA})
     ev["process_name"] = (
         ev["process_path"]
         .str.extract(r"([^\\/]+)$", expand=False)  # phần sau dấu \ hoặc / cuối cùng
