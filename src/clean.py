@@ -51,11 +51,15 @@ def add_process_name(ev: pd.DataFrame) -> pd.DataFrame:
     thành process_name. Giá trị giữ chỗ "-" hoặc chuỗi rỗng được coi là thiếu.
     """
     ev = ev.copy()
-    cols = ev[PROCESS_COLS].replace({"-": pd.NA, "": pd.NA})  # làm sạch TRƯỚC
+
+    # Làm sạch TRƯỚC khi gộp, để "-" không chặn giá trị thật ở các cột sau
+    cols = ev[PROCESS_COLS].replace({"-": pd.NA, "": pd.NA})
+
     proc = cols[PROCESS_COLS[0]]
     for col in PROCESS_COLS[1:]:
-        proc = proc.fillna(ev[col])
+        proc = proc.fillna(cols[col])  # lấy từ bảng đã làm sạch
 
+    ev["process_path"] = proc
     ev["process_name"] = (
         ev["process_path"]
         .str.extract(r"([^\\/]+)$", expand=False)  # phần sau dấu \ hoặc / cuối cùng
