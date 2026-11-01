@@ -1,0 +1,4 @@
+run_id,split,macro_f1_mean,macro_f1_std,sklearn,data_md5,C
+leak-random,"StratifiedKFold(5,rs=42)",0.803,0.009,1.9.1,f74ce83f220d5db823d1dd040170e8a4,1.0
+leak-group,"StratifiedGroupKFold(5,rs=42)",0.206,0.033,1.9.1,f74ce83f220d5db823d1dd040170e8a4,1.0
+host-only-group,"StratifiedGroupKFold(5,rs=42)",0.063,0.038,1.9.1,f74ce83f220d5db823d1dd040170e8a4,1.0
