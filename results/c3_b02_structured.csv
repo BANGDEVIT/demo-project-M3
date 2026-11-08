@@ -1,0 +1,25 @@
+mode,file,true_tactic,ok_first,ok,attempts,seconds,pred_tactic,first_errors,model
+none,DE_RDP_Tunneling_TerminalServices-RemoteConnectionManagerOperational_1149.evtx,Command and Control,True,True,1,60.0,Command and Control,,qwen3.5:4b
+none,MSSQL_multiple_failed_logon_EventID_18456.evtx,Credential Access,True,True,1,32.3,Unknown,,qwen3.5:4b
+none,Sysmon 7 dllhijack_cdpsshims_CDPSvc.evtx,Defense Evasion,True,True,1,63.0,Command and Control,,qwen3.5:4b
+none,discovery_meterpreter_ps_cmd_process_listing_sysmon_10.evtx,Discovery,True,True,1,72.1,Unknown,,qwen3.5:4b
+none,revshell_cmd_svchost_sysmon_1.evtx,Execution,True,True,1,44.3,Unknown,,qwen3.5:4b
+none,lm_remote_registry_sysmon_1_13_3.evtx,Lateral Movement,True,True,1,54.7,Persistence,,qwen3.5:4b
+none,evasion_persis_hidden_run_keyvalue_sysmon_13.evtx,Persistence,True,True,1,43.3,Persistence,,qwen3.5:4b
+none,sysmon_1_13_UACBypass_AppPath_Control.evtx,Privilege Escalation,True,True,1,45.9,Command and Control,,qwen3.5:4b
+json,DE_RDP_Tunneling_TerminalServices-RemoteConnectionManagerOperational_1149.evtx,Command and Control,True,True,1,35.7,Command and Control,,qwen3.5:4b
+json,MSSQL_multiple_failed_logon_EventID_18456.evtx,Credential Access,True,True,1,21.3,Unknown,,qwen3.5:4b
+json,Sysmon 7 dllhijack_cdpsshims_CDPSvc.evtx,Defense Evasion,True,True,1,30.2,Command and Control,,qwen3.5:4b
+json,discovery_meterpreter_ps_cmd_process_listing_sysmon_10.evtx,Discovery,True,True,1,39.0,Unknown,,qwen3.5:4b
+json,revshell_cmd_svchost_sysmon_1.evtx,Execution,True,True,1,20.9,Unknown,,qwen3.5:4b
+json,lm_remote_registry_sysmon_1_13_3.evtx,Lateral Movement,True,True,1,29.8,Persistence,,qwen3.5:4b
+json,evasion_persis_hidden_run_keyvalue_sysmon_13.evtx,Persistence,True,True,1,30.9,Persistence,,qwen3.5:4b
+json,sysmon_1_13_UACBypass_AppPath_Control.evtx,Privilege Escalation,True,True,1,20.7,Command and Control,,qwen3.5:4b
+schema,DE_RDP_Tunneling_TerminalServices-RemoteConnectionManagerOperational_1149.evtx,Command and Control,True,True,1,36.2,Command and Control,,qwen3.5:4b
+schema,MSSQL_multiple_failed_logon_EventID_18456.evtx,Credential Access,True,True,1,18.1,Unknown,,qwen3.5:4b
+schema,Sysmon 7 dllhijack_cdpsshims_CDPSvc.evtx,Defense Evasion,True,True,1,34.0,Command and Control,,qwen3.5:4b
+schema,discovery_meterpreter_ps_cmd_process_listing_sysmon_10.evtx,Discovery,True,True,1,38.0,Unknown,,qwen3.5:4b
+schema,revshell_cmd_svchost_sysmon_1.evtx,Execution,True,True,1,21.0,Unknown,,qwen3.5:4b
+schema,lm_remote_registry_sysmon_1_13_3.evtx,Lateral Movement,True,True,1,28.8,Persistence,,qwen3.5:4b
+schema,evasion_persis_hidden_run_keyvalue_sysmon_13.evtx,Persistence,True,True,1,24.2,Persistence,,qwen3.5:4b
+schema,sysmon_1_13_UACBypass_AppPath_Control.evtx,Privilege Escalation,True,True,1,21.1,Command and Control,,qwen3.5:4b
