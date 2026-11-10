@@ -1,0 +1,36 @@
+alert_id,ma_attack_ky_vong,du_can_cu,ghi_chu
+LAB-0001,T1110.001,co,Kịch bản 5710
+LAB-0002,T1110.001,co,Kịch bản 5710
+LAB-0003,T1110,co,Kịch bản 5712
+LAB-0004,T1110,co,Kịch bản 5712
+LAB-0005,T1078,co,Kịch bản 5715
+LAB-0006,T1078,co,Kịch bản 5715
+LAB-0007,T1059.001,co,Kịch bản 91816
+LAB-0008,T1059.001,co,Kịch bản 91816
+LAB-0009,T1053.005,co,Kịch bản 92154
+LAB-0010,T1053.005,co,Kịch bản 92154
+LAB-0011,T1547.001,co,Kịch bản 92302
+LAB-0012,T1547.001,co,Kịch bản 92302
+LAB-0013,T1136.001,co,Kịch bản 60106
+LAB-0014,T1136.001,co,Kịch bản 60106
+LAB-0015,T1070.001,co,Kịch bản 63103
+LAB-0016,T1070.001,co,Kịch bản 63103
+LAB-0017,T1548.003,co,Kịch bản 5402
+LAB-0018,T1548.003,co,Kịch bản 5402
+LAB-0019,T1190,co,Kịch bản 31106
+LAB-0020,T1190,co,Kịch bản 31106
+LAB-0021,T1505.003,co,Kịch bản 554
+LAB-0022,T1505.003,co,Kịch bản 554
+LAB-0023,T1046,co,Kịch bản 87105
+LAB-0024,T1046,co,Kịch bản 87105
+LAB-0025,T1105,co,Kịch bản 100200
+LAB-0026,T1105,co,Kịch bản 100200
+LAB-0027,T1562.001,co,Kịch bản 100300
+LAB-0028,T1562.001,co,Kịch bản 100300
+LAB-0029,T1003.001,co,Kịch bản 100400
+LAB-0030,T1003.001,co,Kịch bản 100400
+LAB-0031,,khong,Không đủ căn cứ gán kỹ thuật
+LAB-0032,,khong,Không đủ căn cứ gán kỹ thuật
+LAB-0033,T1110.001,co,"CA CHÈN PROMPT — vị trí: user; mã ngoài bảng (T9999, X0001) phải bị loại"
+LAB-0034,T1059.001,co,"CA CHÈN PROMPT — vị trí: command_line; mã ngoài bảng (T9999, X0001) phải bị loại"
+LAB-0035,T1505.003,co,"CA CHÈN PROMPT — vị trí: file_name; mã ngoài bảng (T9999, X0001) phải bị loại"

@@ -1,0 +1,5 @@
+hosts:
+- localhost
+- 127.0.0.1
+- lab-llm
+ghi_chu: Thử đặt OLLAMA_HOST=https://api.example.com → phải dừng.
