@@ -1,0 +1,17 @@
+prompt,file,true_tactic,ok,pred_tactic,prompt_tok,prefill_s,total_s,match,unknown,model
+zero-shot,DE_RDP_Tunneling_TerminalServices-RemoteConnectionManagerOperational_1149.evtx,Command and Control,True,Command and Control,545,20.78373,66.0132407,True,False,qwen3.5:4b
+zero-shot,MSSQL_multiple_failed_logon_EventID_18456.evtx,Credential Access,True,Unknown,490,18.35813,40.091894,False,True,qwen3.5:4b
+zero-shot,Sysmon 7 dllhijack_cdpsshims_CDPSvc.evtx,Defense Evasion,True,Resource Development,1011,37.737583,77.7209877,False,False,qwen3.5:4b
+zero-shot,discovery_meterpreter_ps_cmd_process_listing_sysmon_10.evtx,Discovery,True,Initial Access,997,38.727082,72.1258072,False,False,qwen3.5:4b
+zero-shot,revshell_cmd_svchost_sysmon_1.evtx,Execution,True,Resource Development,677,24.423771,53.7662726,False,False,qwen3.5:4b
+zero-shot,lm_remote_registry_sysmon_1_13_3.evtx,Lateral Movement,True,Unknown,703,18.964713,46.0735371,False,True,qwen3.5:4b
+zero-shot,evasion_persis_hidden_run_keyvalue_sysmon_13.evtx,Persistence,True,Persistence,516,11.535228,31.0698929,True,False,qwen3.5:4b
+zero-shot,sysmon_1_13_UACBypass_AppPath_Control.evtx,Privilege Escalation,True,Command and Control,675,18.72666,128.5486386,False,False,qwen3.5:4b
+few-shot,DE_RDP_Tunneling_TerminalServices-RemoteConnectionManagerOperational_1149.evtx,Command and Control,True,Command and Control,1542,60.825216,92.4806861,True,False,qwen3.5:4b
+few-shot,MSSQL_multiple_failed_logon_EventID_18456.evtx,Credential Access,True,Unknown,1487,17.991382,35.7860364,False,True,qwen3.5:4b
+few-shot,Sysmon 7 dllhijack_cdpsshims_CDPSvc.evtx,Defense Evasion,True,Command and Control,2008,39.782127,63.0070331,False,False,qwen3.5:4b
+few-shot,discovery_meterpreter_ps_cmd_process_listing_sysmon_10.evtx,Discovery,True,Unknown,1994,33.749898999,57.6693441,False,True,qwen3.5:4b
+few-shot,revshell_cmd_svchost_sysmon_1.evtx,Execution,True,Unknown,1674,23.053524,46.4160998,False,True,qwen3.5:4b
+few-shot,lm_remote_registry_sysmon_1_13_3.evtx,Lateral Movement,True,Persistence,1700,18.963487,45.5856341,False,False,qwen3.5:4b
+few-shot,evasion_persis_hidden_run_keyvalue_sysmon_13.evtx,Persistence,True,Persistence,1513,11.507334,32.2754816,True,False,qwen3.5:4b
+few-shot,sysmon_1_13_UACBypass_AppPath_Control.evtx,Privilege Escalation,True,Defense Evasion,1672,17.538959,41.5716783,False,False,qwen3.5:4b
