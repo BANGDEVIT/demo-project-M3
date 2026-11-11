@@ -1,0 +1,7 @@
+cau_hoi,ky_vong,tfidf_top3,tfidf_max,tfidf_hit3,emb_top3,emb_max,emb_hit3
+many failed SSH logins with different usernames from one IP address,T1110.001,"['T1021.004', 'T1566.001', 'T1110.001']",0.127,True,"['T1021.004', 'T1110.001', 'T1136.001']",0.401,True
+nhiều lần đăng nhập SSH thất bại với các tên người dùng khác nhau từ một địa chỉ IP,T1110.001,"['T1021.004', 'T1046', 'T1059.004']",0.277,False,"['T1021.004', 'T1110.001', 'T1136.001']",0.402,True
+xóa nhật ký sự kiện bảo mật của Windows để che dấu vết,T1070.001,"['T1053.005', 'T1070.001', 'T1547.001']",0.144,True,"['T1070.001', 'T1562.001', 'T1547.001']",0.62,True
+attacker encrypted files on the file server and left a ransom note,T1486,"['T1486', 'T1027', 'T1505.003']",0.182,True,"['T1486', 'T1027', 'T1566.001']",0.547,True
+tải một công cụ từ máy chủ bên ngoài về thư mục /tmp bằng wget,T1105,"['T1105', 'T1566.001', 'T1548.003']",0.155,True,"['T1105', 'T1505.003', 'T1059.001']",0.441,True
+tắt tính năng bảo vệ thời gian thực của phần mềm diệt virus,T1562.001,"['T1562.001', 'T1566.001', 'T1548.003']",0.065,True,"['T1562.001', 'T1070.001', 'T1547.001']",0.388,True
