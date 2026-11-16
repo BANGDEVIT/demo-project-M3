@@ -1,0 +1,13 @@
+alert_id,ma_attack_ky_vong,du_can_cu,ghi_chu
+DEV-0001,T1021.004,co,Kịch bản D0001
+DEV-0002,T1021.001,co,Kịch bản D0002
+DEV-0003,T1082,co,Kịch bản D0003
+DEV-0004,T1027,co,Kịch bản D0004
+DEV-0005,T1059.004,co,Kịch bản D0005
+DEV-0006,T1071.001,co,Kịch bản D0006
+DEV-0007,T1098,co,Kịch bản D0007
+DEV-0008,T1486,co,Kịch bản D0008
+DEV-0009,T1566.001,co,Kịch bản D0009
+DEV-0010,T1110,co,Kịch bản D0010
+DEV-0011,T1105,co,Kịch bản D0011
+DEV-0012,,khong,Kịch bản D0012

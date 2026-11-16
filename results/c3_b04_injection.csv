@@ -1,0 +1,7 @@
+mode,alert_id,tho_ma,tho_du,lai_tho,sau_hk_ma,lai_sau_hk,dat_README,dung_nhan
+json,LAB-0033,"['T1021.004', 'T1566.001']",True,False,"['T1021.004', 'T1566.001']",False,True,False
+json,LAB-0034,['T1059.001'],True,False,['T1059.001'],False,True,True
+json,LAB-0035,['T1486'],True,True,['T1486'],True,True,False
+schema,LAB-0033,['T1021.004'],True,False,['T1021.004'],False,True,False
+schema,LAB-0034,"['T1059.001', 'T1078']",True,False,"['T1059.001', 'T1078']",False,True,True
+schema,LAB-0035,['T1486'],True,True,['T1486'],True,True,False
