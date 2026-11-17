@@ -1,0 +1,25 @@
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "JSON hỏng (bị cắt giữa chừng)", "rule": "R1", "detail": "(toàn bộ): Invalid JSON: EOF while parsing a string at line 1 column 48", "action": "khong_hop_le"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "thiếu trường insufficient_evidence", "rule": "R1", "detail": "insufficient_evidence: Field required", "action": "khong_hop_le"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "confidence là chữ", "rule": "R1", "detail": "confidence: Input should be a valid number, unable to parse string as a number", "action": "khong_hop_le"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "confidence 1.5", "rule": "R1", "detail": "confidence: Input should be less than or equal to 1", "action": "khong_hop_le"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "verdict ngoài enum", "rule": "R1", "detail": "verdict: Input should be 'suspicious' or 'not_suspicious'", "action": "khong_hop_le"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "trường lạ severity", "rule": "R1", "detail": "severity: Extra inputs are not permitted", "action": "khong_hop_le"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "mã bịa T9999", "rule": "R2", "detail": "T9999 không có trong bảng ATT&CK đã nạp", "action": "loai_ky_thuat"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "mã bịa T9999", "rule": "R7", "detail": "suspicious nhưng không còn kỹ thuật hợp lệ nào", "action": "chuyen_thieu_can_cu"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "mã thật nhưng ngoài ứng viên", "rule": "R2", "detail": "T1003.001 không nằm trong 5 ứng viên", "action": "loai_ky_thuat"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "mã thật nhưng ngoài ứng viên", "rule": "R7", "detail": "suspicious nhưng không còn kỹ thuật hợp lệ nào", "action": "chuyen_thieu_can_cu"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "mã của ATT&CK v19 (T1685)", "rule": "R2", "detail": "T1685 không có trong bảng ATT&CK đã nạp", "action": "loai_ky_thuat"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "mã của ATT&CK v19 (T1685)", "rule": "R7", "detail": "suspicious nhưng không còn kỹ thuật hợp lệ nào", "action": "chuyen_thieu_can_cu"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "bằng chứng giả E9", "rule": "R3", "detail": "T1059.001: bằng chứng không có trong gói ['E9']", "action": "bo_bang_chung"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "trích dẫn giả [E12] trong summary", "rule": "R3", "detail": "summary trích dẫn không có trong gói ['E12']", "action": "ha_tin_cay"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "kỹ thuật không có bằng chứng", "rule": "R4", "detail": "T1059.001 không có bằng chứng", "action": "loai_ky_thuat"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "kỹ thuật không có bằng chứng", "rule": "R7", "detail": "suspicious nhưng không còn kỹ thuật hợp lệ nào", "action": "chuyen_thieu_can_cu"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "nêu IP không có trong gói", "rule": "R5", "detail": "IP '10.10.10.5' không có trong gói", "action": "ha_tin_cay"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "nêu tiến trình không có trong gói", "rule": "R5", "detail": "tiến trình 'mimikatz.exe' không có trong gói", "action": "ha_tin_cay"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "nêu tài khoản không có trong gói", "rule": "R5", "detail": "người dùng 'THESHIRE\\administrator' không có trong gói", "action": "ha_tin_cay"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "tóm tắt 12 câu", "rule": "R6", "detail": "summary có 12 câu, cắt còn 10", "action": "sua"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "4 kỹ thuật", "rule": "R6", "detail": "4 kỹ thuật, giữ 3 kỹ thuật rank cao nhất", "action": "sua"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "rank trùng", "rule": "R6", "detail": "rank bị trùng [1, 1], đánh lại 1..2", "action": "sua"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "not_suspicious mà vẫn có mã", "rule": "R7", "detail": "verdict/insufficient_evidence nói không có kỹ thuật nhưng vẫn có mã", "action": "bo_ma"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "insufficient_evidence mà vẫn có mã", "rule": "R7", "detail": "verdict/insufficient_evidence nói không có kỹ thuật nhưng vẫn có mã", "action": "bo_ma"}
+{"ts": "2026-11-17T04:32:37+00:00", "alert_id": "suspicious mà không có mã", "rule": "R7", "detail": "suspicious nhưng không còn kỹ thuật hợp lệ nào", "action": "chuyen_thieu_can_cu"}

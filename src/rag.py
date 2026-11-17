@@ -30,20 +30,50 @@ def clean(text):
     return re.sub(r"\s+", " ", text).strip()
 
 
+def _live(o):
+    """Đối tượng STIX còn hiệu lực (không bị thu hồi, không bị bỏ)."""
+    return not o.get("revoked") and not o.get("x_mitre_deprecated")
+
+
+def data_components(objects):
+    """{id attack-pattern: [tên data component]} theo chuỗi detection strategy -> analytic -> log source.
+
+    Từ ATT&CK v18, kỹ thuật không còn trường x_mitre_data_sources; nguồn dữ liệu phát hiện nằm ở
+    quan hệ 'detects' (detection strategy -> kỹ thuật) và các analytic của strategy đó.
+    """
+    by_id = {o["id"]: o for o in objects}
+    out = {}
+    for r in objects:
+        if (
+            r["type"] != "relationship"
+            or r["relationship_type"] != "detects"
+            or not _live(r)
+        ):
+            continue
+        strategy = by_id.get(r["source_ref"])
+        if strategy is None or not _live(strategy):
+            continue
+        names = out.setdefault(r["target_ref"], set())
+        for a in strategy.get("x_mitre_analytic_refs", []):
+            for ls in by_id[a].get("x_mitre_log_source_references", []):
+                names.add(by_id[ls["x_mitre_data_component_ref"]]["name"])
+    return {k: sorted(v) for k, v in out.items()}
+
+
 def build_kb(codes, stix_path=STIX):
-    """Bảng kỹ thuật (ma, ten, chien_thuat, mo_ta) cho các mã trong codes, và phiên bản ATT&CK."""
+    """Bảng kỹ thuật cho các mã trong codes, và phiên bản ATT&CK.
+
+    Cột: ma, ten, chien_thuat (list), nen_tang (list), nguon_du_lieu (list), mo_ta.
+    """
     with open(stix_path, encoding="utf-8") as f:
         objects = json.load(f)["objects"]
     version = next(
         o["x_mitre_version"] for o in objects if o["type"] == "x-mitre-collection"
     )
+    detect = data_components(objects)
     rows = []
     for o in objects:
-        if (
-            o["type"] != "attack-pattern"
-            or o.get("revoked")
-            or o.get("x_mitre_deprecated")
-        ):
+        if o["type"] != "attack-pattern" or not _live(o):
             continue
         ma = next(
             r["external_id"]
@@ -55,9 +85,11 @@ def build_kb(codes, stix_path=STIX):
                 {
                     "ma": ma,
                     "ten": o["name"],
-                    "chien_thuat": ", ".join(
+                    "chien_thuat": [
                         p["phase_name"] for p in o.get("kill_chain_phases", [])
-                    ),
+                    ],
+                    "nen_tang": o.get("x_mitre_platforms", []),
+                    "nguon_du_lieu": detect.get(o["id"], []),
                     "mo_ta": clean(o.get("description", "")),
                 }
             )
@@ -100,28 +132,59 @@ def connect(dsn=PG_DSN):
 
 
 def create_table(conn):
-    """Tạo bảng attack_kb nếu chưa có."""
+    """Tạo bảng attack_kb nếu chưa có (bản Buổi 9: các cột danh sách là text[])."""
     conn.execute(f"""
         CREATE TABLE IF NOT EXISTS attack_kb (
-            ma          text PRIMARY KEY,
-            ten         text NOT NULL,
-            chien_thuat text NOT NULL,
-            mo_ta       text NOT NULL,
-            attack_ver  text NOT NULL,
-            embed_model text NOT NULL,
-            embedding   vector({DIM}) NOT NULL
+            ma            text PRIMARY KEY,
+            ten           text NOT NULL,
+            chien_thuat   text[] NOT NULL,
+            nen_tang      text[] NOT NULL,
+            nguon_du_lieu text[] NOT NULL,
+            mo_ta         text NOT NULL,
+            attack_ver    text NOT NULL,
+            embed_model   text NOT NULL,
+            embedding     vector({DIM}) NOT NULL
         )""")
+
+
+def migrate(conn, kb):
+    """Nâng bảng attack_kb của Buổi 5 lên bản Buổi 9 mà không phải embed lại.
+
+    chien_thuat: text 'a, b' -> text[] {a,b}; thêm nen_tang, nguon_du_lieu rồi điền từ kb.
+    """
+    kind = conn.execute("""
+        SELECT data_type FROM information_schema.columns
+        WHERE table_name = 'attack_kb' AND column_name = 'chien_thuat'""").fetchone()[0]
+    if kind == "text":
+        conn.execute(
+            "ALTER TABLE attack_kb ALTER COLUMN chien_thuat TYPE text[] "
+            "USING string_to_array(chien_thuat, ', ')"
+        )
+    conn.execute("ALTER TABLE attack_kb ADD COLUMN IF NOT EXISTS nen_tang text[]")
+    conn.execute("ALTER TABLE attack_kb ADD COLUMN IF NOT EXISTS nguon_du_lieu text[]")
+    with conn.cursor() as cur:
+        for row in kb.itertuples(index=False):
+            cur.execute(
+                "UPDATE attack_kb SET chien_thuat = %s, nen_tang = %s, nguon_du_lieu = %s "
+                "WHERE ma = %s",
+                (row.chien_thuat, row.nen_tang, row.nguon_du_lieu, row.ma),
+            )
+    conn.execute("ALTER TABLE attack_kb ALTER COLUMN nen_tang SET NOT NULL")
+    conn.execute("ALTER TABLE attack_kb ALTER COLUMN nguon_du_lieu SET NOT NULL")
+    return kind
 
 
 def upsert(conn, kb, vectors, version):
     """Ghi (hoặc ghi đè) từng kỹ thuật cùng vector của nó."""
     sql = """
-        INSERT INTO attack_kb (ma, ten, chien_thuat, mo_ta, attack_ver, embed_model, embedding)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO attack_kb (ma, ten, chien_thuat, nen_tang, nguon_du_lieu, mo_ta,
+                               attack_ver, embed_model, embedding)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         ON CONFLICT (ma) DO UPDATE SET
-            ten = EXCLUDED.ten, chien_thuat = EXCLUDED.chien_thuat, mo_ta = EXCLUDED.mo_ta,
-            attack_ver = EXCLUDED.attack_ver, embed_model = EXCLUDED.embed_model,
-            embedding = EXCLUDED.embedding"""
+            ten = EXCLUDED.ten, chien_thuat = EXCLUDED.chien_thuat,
+            nen_tang = EXCLUDED.nen_tang, nguon_du_lieu = EXCLUDED.nguon_du_lieu,
+            mo_ta = EXCLUDED.mo_ta, attack_ver = EXCLUDED.attack_ver,
+            embed_model = EXCLUDED.embed_model, embedding = EXCLUDED.embedding"""
     with conn.cursor() as cur:
         for row, vec in zip(kb.itertuples(index=False), vectors):
             cur.execute(
@@ -130,6 +193,8 @@ def upsert(conn, kb, vectors, version):
                     row.ma,
                     row.ten,
                     row.chien_thuat,
+                    row.nen_tang,
+                    row.nguon_du_lieu,
                     row.mo_ta,
                     version,
                     EMBED_MODEL,
@@ -138,15 +203,16 @@ def upsert(conn, kb, vectors, version):
             )
 
 
-def search(conn, query_vec, k=5):
-    """k kỹ thuật gần câu truy vấn nhất: (ma, ten, độ giống cosine)."""
+def search(conn, query_vec, k=5, platform=None):
+    """k kỹ thuật gần câu truy vấn nhất: (ma, ten, độ giống cosine); platform lọc theo nen_tang."""
     return conn.execute(
         """
-        SELECT ma, ten, 1 - (embedding <=> %s) AS do_giong
+        SELECT ma, ten, 1 - (embedding <=> %(v)s) AS do_giong
         FROM attack_kb
-        ORDER BY embedding <=> %s
-        LIMIT %s""",
-        (query_vec, query_vec, k),
+        WHERE %(p)s::text IS NULL OR %(p)s = ANY(nen_tang)
+        ORDER BY embedding <=> %(v)s
+        LIMIT %(k)s""",
+        {"v": query_vec, "p": platform, "k": k},
     ).fetchall()
 
 
@@ -164,10 +230,11 @@ def alert_query(lines, sanitize=True):
     return re.sub(r"[ \t]+", " ", text).strip()
 
 
-def candidates(conn, lines, k=5, sanitize=True):
-    """k kỹ thuật ứng viên cho một cảnh báo: (ma, ten, độ giống)."""
-    vec = embed([as_query(alert_query(lines, sanitize))])[0]
-    return search(conn, vec, k)
+def candidates(conn, lines, k=5, sanitize=True, platform=None, query=None):
+    """k kỹ thuật ứng viên: (ma, ten, độ giống). query=None thì tạo truy vấn từ gói bằng chứng."""
+    text = query if query is not None else alert_query(lines, sanitize)
+    vec = embed([as_query(text)])[0]
+    return search(conn, vec, k, platform)
 
 
 def kb_rows(conn, codes):
@@ -190,7 +257,8 @@ RAG_SYSTEM = SYSTEM + (
 def build_messages_rag(lines, refs, desc_chars=600):
     """system cố định + user gồm khối tham khảo (k ứng viên) và khối cảnh báo trong thẻ ngẫu nhiên."""
     ref_text = "\n".join(
-        f"- {ma} {ten} ({ct}): {mo_ta[:desc_chars]}" for ma, ten, ct, mo_ta in refs
+        f"- {ma} {ten} ({', '.join(ct)}): {mo_ta[:desc_chars]}"
+        for ma, ten, ct, mo_ta in refs
     )
     tag = f"alert-{secrets.token_hex(3)}"
     pack = "\n".join(f"[E{i + 1}] {clean_tags(l)}" for i, l in enumerate(lines))

